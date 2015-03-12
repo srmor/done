@@ -1,0 +1,23 @@
+{
+  "name": "Done.",
+  "version": "1.0.0",
+  "description": "Time Management App",
+  "main": "src/js/main.js",
+  "scripts": {
+    "build": "browserify src/js/main.js -o build/bundle.js",
+    "watch": "watchify src/js/main.js -o build/bundle.js --debug --verbose"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^0.13.0"
+  },
+  "devDependencies": {
+    "browserify": "^9.0.3"
+  },
+  "browserify": {
+    "transform": [
+      "reactify"
+    ]
+  }
+}
