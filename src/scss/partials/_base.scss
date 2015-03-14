@@ -1,0 +1,13 @@
+@import '../modules/colors';
+@import '../modules/fonts';
+
+body {
+  background-color: $background-color;
+  font-family: $main-font;
+}
+
+
+.outer-container {
+  margin: 50px auto;
+  width: 600px;
+}

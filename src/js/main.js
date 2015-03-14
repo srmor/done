@@ -15,11 +15,11 @@ var DoneContainer = React.createClass({
 });
 
 var TASKS = [
-  {title: 'Eat lunch', startTime: '12:45:03'},
-  {title: 'Eat dinner', startTime: '12:45:03'},
-  {title: 'Sleep', startTime: '12:45:03'},
-  {title: 'Work', startTime: '12:45:03'},
-  {title: 'Collaborate', startTime: '12:45:03'},
+  {title: 'Eat lunch', startTime: '12:45:03', current: true },
+  {title: 'Eat dinner', startTime: '12:45:03', current: false },
+  {title: 'Sleep', startTime: '12:45:03', current: false },
+  {title: 'Work', startTime: '12:45:03', current: false },
+  {title: 'Collaborate', startTime: '12:45:03', current: false }
 ];
 
 var TIME_STATUS = {
