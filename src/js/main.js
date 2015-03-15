@@ -23,7 +23,10 @@ var TASKS = [
 ];
 
 var TIME_STATUS = {
-  timeLeft: '15:25:23',
+  timeLeft: {
+    minutes: 13,
+    seconds: 45
+  },
   currentlyPlaying: false
 };
 
