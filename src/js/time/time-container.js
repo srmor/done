@@ -8,7 +8,7 @@ module.exports = React.createClass({
     var timeStatus = this.props.timeStatus;
     return (
       <div className="time">
-        <TimeLeft time={ timeStatus.timeLeft }/>
+        <TimeLeft time={ timeStatus.time }/>
         <TimeControl playing={ timeStatus.currentlyPlaying }/>
       </div>
     );

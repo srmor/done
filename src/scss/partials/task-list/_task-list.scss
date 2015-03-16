@@ -4,7 +4,7 @@
   background-color: $main-color;
   box-sizing: border-box;
   color: $font-color;
-  display: inline-block;
+  display: table-cell;
   width: 300px;
 
   .task-item {

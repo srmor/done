@@ -23,9 +23,15 @@ var TASKS = [
 ];
 
 var TIME_STATUS = {
-  timeLeft: {
-    minutes: 13,
-    seconds: 45
+  time: {
+    totalTime: {
+      minutes: 25,
+      seconds: 20
+    },
+    remainingTime: {
+      minutes: 13,
+      seconds: 45
+    }
   },
   currentlyPlaying: false
 };

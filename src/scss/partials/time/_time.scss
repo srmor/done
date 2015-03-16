@@ -1,0 +1,52 @@
+@import '../../modules/colors';
+@import '../../modules/fonts';
+
+.time {
+  box-sizing: border-box;
+  color: $font-color;
+  display: table-cell;
+  vertical-align: middle;
+  width: 500px;
+
+  .time-left {
+    // background: $task-item-color;
+    border-radius: 3px;
+    font-size: 30px;
+    margin: 0 auto;
+    padding: 20px 30px;
+    position: relative;
+    text-align: center;
+    width: 20%;
+  }
+
+  span {
+    position: relative;
+    z-index: 99;
+  }
+
+  .percent {
+    bottom: 0;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+  }
+
+  .percent-left {
+    background-color: $main-color;
+    border-radius: 0 3px 3px 0;
+    left: 0%;
+    right: 0;
+  }
+
+  .percent-complete {
+    background-color: $task-item-color;
+    border-radius: 3px 0 0 3px;
+    left: 0;
+    right: 100%;
+  }
+
+  .time-control {
+    margin: 20px;
+    text-align: center;
+  }
+}
