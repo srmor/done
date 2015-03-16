@@ -5,11 +5,15 @@ var TimeControl = require('./time-control');
 
 module.exports = React.createClass({
   render: function () {
-    var timeStatus = this.props.timeStatus;
+    var currentTask = this.props.currentTask;
+    var totalTime = this.props.totalTime;
+
+    var remainingTime = currentTask ? currentTask.remainingTime : totalTime;
+
     return (
       <div className="time">
-        <TimeLeft time={ timeStatus.time }/>
-        <TimeControl playing={ timeStatus.currentlyPlaying }/>
+        <TimeLeft remainingTime={ remainingTime  } totalTime={ totalTime }/>
+        <TimeControl playing={ currentTask ? true : false }/>
       </div>
     );
   }

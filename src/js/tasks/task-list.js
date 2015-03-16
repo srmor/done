@@ -1,6 +1,7 @@
 var React = require('react');
 
 var TaskItem = require('./task-item');
+var NewTaskItem = require('./new-task-item');
 
 module.exports = React.createClass({
   render: function () {
@@ -8,6 +9,12 @@ module.exports = React.createClass({
       return (<TaskItem task={ task } key={ index }/>);
     });
 
-    return (<div className="task-list">{ tasks }</div>);
+    var newTask = this.props.newTask ? <NewTaskItem task={ this.props.newTask } updateTask={ this.props.updateNewTask } createNewTask={ this.props.createNewTask }/> : <div className="create-new-task" onClick={ this.props.createNewTaskDraft }>Create New Task</div>;
+
+    return (
+      <div className="task-list">
+        { tasks }
+        { newTask }
+      </div>);
   }
 });
