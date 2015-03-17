@@ -174,10 +174,13 @@ module.exports = React.createClass({
     }, 25000);
   },
   render: function () {
+    var timeContainer;
+    if (this.state.tasks.length > 0)
+      timeContainer = <TimeContainer currentTask={ this.state.current } totalTime={ this.state.taskTime } start={ this.startTask } pause={ this.pauseTask } updateCurrentTaskRemainingTime={ this.updateCurrentTaskRemainingTime }/>;
     return (
       <div className="outer-container">
         <TaskList tasks={ this.state.tasks } newTask={ this.state.newTask } updateNewTask={ this.updateNewTask } createNewTask={ this.createNewTask } createNewTaskDraft={ this.createNewTaskDraft }/>
-        <TimeContainer currentTask={ this.state.current } totalTime={ this.state.taskTime } start={ this.startTask } pause={ this.pauseTask } updateCurrentTaskRemainingTime={ this.updateCurrentTaskRemainingTime }/>
+        { timeContainer }
       </div>
     );
   }
