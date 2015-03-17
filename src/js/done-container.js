@@ -3,6 +3,8 @@ var React = require('react');
 var TaskList = require('./tasks/task-list');
 var TimeContainer = require('./time/time-container');
 
+var util = require('./util');
+
 var addOneToHour = function (hour) {
   if (hour == 23)
     return 0;
@@ -76,8 +78,8 @@ module.exports = React.createClass({
       var newTaskStartTime;
       if (previousState.tasks.length > 0) {
         var lastTaskTimeStamp = startTimeStringToTimeStamp(previousState.tasks[previousState.tasks.length - 1].startTime);
-        // add 25 minutes
-        newTaskStartTime = timestampToStartTimeString(lastTaskTimeStamp + 1500000, false);
+        // add task time to last task start time
+        newTaskStartTime = timestampToStartTimeString(lastTaskTimeStamp + (util.timeToSeconds(previousState.taskTime)*1000), false);
       }
       else {
         newTaskStartTime = timestampToStartTimeString(Date.now(), false);
@@ -132,14 +134,14 @@ module.exports = React.createClass({
             var startTime = initialTime;
             newState.tasks = previousState.tasks.map(function(task) {
               task.startTime = timestampToStartTimeString(startTime, true);
-              startTime += 1500000;
+              startTime += util.timeToSeconds(previousState.taskTime)*1000;
               return task;
             });
 
             // change the value on the newTask if there is one
             if (previousState.newTask) {
               var newNewTask = previousState.newTask;
-              newNewTask.startTime = timestampToStartTimeString(startTime)
+              newNewTask.startTime = timestampToStartTimeString(startTime);
               newState.newTask = newNewTask;
             }
 

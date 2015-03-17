@@ -1,9 +1,6 @@
 var React = require('react');
 
-var timeToSeconds = function (time) {
-  minutesAsSeconds = time.minutes * 60;
-  return minutesAsSeconds + time.seconds;
-};
+var util = require('../util');
 
 var formatTimeUnit = function (unit) {
   var unitAsString = unit.toString();
@@ -19,8 +16,8 @@ module.exports = React.createClass({
     var totalTime = this.props.totalTime;
     var remainingTime = this.props.remainingTime;
 
-    var remainingTimeAsSeconds = timeToSeconds(remainingTime);
-    var totalTimeAsSeconds = timeToSeconds(totalTime);
+    var remainingTimeAsSeconds = util.timeToSeconds(remainingTime);
+    var totalTimeAsSeconds = util.timeToSeconds(totalTime);
 
     var percentComplete = Math.floor((remainingTimeAsSeconds / totalTimeAsSeconds) * 100);
     var percentLeft = 100 - percentComplete;
