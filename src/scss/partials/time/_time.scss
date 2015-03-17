@@ -9,7 +9,6 @@
   width: 500px;
 
   .time-left {
-    // background: $task-item-color;
     border-radius: 3px;
     font-size: 30px;
     margin: 0 auto;
@@ -33,14 +32,12 @@
 
   .percent-left {
     background-color: $main-color;
-    border-radius: 0 3px 3px 0;
     left: 0%;
     right: 0;
   }
 
   .percent-complete {
     background-color: $task-item-color;
-    border-radius: 3px 0 0 3px;
     left: 0;
     right: 100%;
   }

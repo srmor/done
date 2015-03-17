@@ -2,14 +2,14 @@ var React = require('react');
 
 module.exports = React.createClass({
   handleClick: function (e) {
-    if (this.props.playing)
+    if (this.props.timerOn)
       this.props.pause();
     else
       this.props.start();
   },
   render: function () {
     var classes = ['fa', 'fa-lg'];
-    if (this.props.playing)
+    if (this.props.timerOn)
       classes.push('fa-pause');
     else
       classes.push('fa-play');

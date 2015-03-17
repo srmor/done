@@ -16,9 +16,16 @@ module.exports = React.createClass({
       var secondsDifference = Math.floor((currentTime - initialTime)/1000);
       initialTime = currentTime;
 
+      if (!that.props.currentTask.remainingTime)
+        that.props.currentTask.remainingTime = that.props.totalTime;
+
       var secondsRemaining = util.timeToSeconds(that.props.currentTask.remainingTime);
       var newSecondsRemaining = secondsRemaining - secondsDifference;
-      that.props.updateCurrentTaskRemainingTime(util.secondsToTime(newSecondsRemaining));
+
+      if (newSecondsRemaining === -1)
+        that.props.switchMode();
+      else
+        that.props.updateCurrentTaskRemainingTime(util.secondsToTime(newSecondsRemaining));
     }, 1000);
   },
   pauseTimer: function () {
@@ -30,12 +37,12 @@ module.exports = React.createClass({
     var currentTask = this.props.currentTask;
     var totalTime = this.props.totalTime;
 
-    var remainingTime = currentTask ? currentTask.remainingTime : totalTime;
+    var remainingTime = currentTask.remainingTime || totalTime;
 
     return (
       <div className="time">
         <TimeLeft remainingTime={ remainingTime  } totalTime={ totalTime }/>
-        <TimeControl playing={ currentTask ? true : false } start={ this.startTimer } pause={ this.pauseTimer }/>
+        <TimeControl timerOn={ this.props.timerOn } start={ this.startTimer } pause={ this.pauseTimer }/>
       </div>
     );
   }

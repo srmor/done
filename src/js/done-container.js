@@ -70,23 +70,35 @@ module.exports = React.createClass({
     this.setState(function (previousState) {
       var nextTask = previousState.tasks[0];
 
-      if (!nextTask.remainingTime)
-        nextTask.remainingTime = nextTask.remainingTime = previousState.taskTime;
-
-      return {current: nextTask};
+      return {
+        current: nextTask,
+        timerOn: true
+      };
     });
   },
   pauseTask: function () {
     this.setState({
-      current: null
+      timerOn: false
     });
   },
   updateCurrentTaskRemainingTime: function (newTime) {
     this.setState(function (previousState) {
       var newCurrent = previousState.current;
+
       newCurrent.remainingTime = newTime;
       return {current: newCurrent};
     });
+  },
+  switchMode: function () {
+    if (this.state.tasks.length > 1) {
+      this.setState(function (previousState) {
+        previousState.tasks.shift();
+        return {
+          current: previousState.tasks[0],
+          tasks: previousState.tasks
+        };
+      });
+    }
   },
   updateNewTask: function (value) {
     this.setState(function(previousState) {
@@ -118,12 +130,20 @@ module.exports = React.createClass({
   createNewTask: function () {
     if (this.state.newTask) {
       this.setState(function (previousState) {
+        var newState = {};
+
         var tasks = previousState.tasks;
+
+        // make sure that there is always a current task
+        if (tasks.length === 0)
+          newState.current = previousState.newTask;
+
         tasks.push(previousState.newTask);
-        return {
-          tasks: tasks,
-          newTask: null
-        };
+
+        newState.newTask = null;
+        newState.tasks = tasks;
+
+        return newState;
       });
     }
   },
@@ -131,10 +151,11 @@ module.exports = React.createClass({
     return {
       tasks: [],
       current: null,
+      timerOn: false,
       newTask: null,
       taskTime: {
-        minutes: 25,
-        seconds: 0
+        minutes: 0,
+        seconds: 10
       }
     };
   },
@@ -143,7 +164,7 @@ module.exports = React.createClass({
     var that = this;
     setInterval(function () {
       // only update the time if the timer is not currently going
-      if (!that.state.current) {
+      if (!that.state.timerOn) {
         var currentTime = Date.now();
         var minuteInSeconds = 60000;
         if (currentTime >= (initialTime + minuteInSeconds)) {
@@ -174,12 +195,14 @@ module.exports = React.createClass({
     }, 25000);
   },
   render: function () {
+    // only show the timer if there are tasks
     var timeContainer;
     if (this.state.tasks.length > 0)
-      timeContainer = <TimeContainer currentTask={ this.state.current } totalTime={ this.state.taskTime } start={ this.startTask } pause={ this.pauseTask } updateCurrentTaskRemainingTime={ this.updateCurrentTaskRemainingTime }/>;
+      timeContainer = <TimeContainer currentTask={ this.state.current } totalTime={ this.state.taskTime } start={ this.startTask } pause={ this.pauseTask } updateCurrentTaskRemainingTime={ this.updateCurrentTaskRemainingTime } timerOn={ this.state.timerOn } switchMode={ this.switchMode }/>;
+
     return (
       <div className="outer-container">
-        <TaskList tasks={ this.state.tasks } newTask={ this.state.newTask } updateNewTask={ this.updateNewTask } createNewTask={ this.createNewTask } createNewTaskDraft={ this.createNewTaskDraft }/>
+        <TaskList tasks={ this.state.tasks } newTask={ this.state.newTask } updateNewTask={ this.updateNewTask } createNewTask={ this.createNewTask } createNewTaskDraft={ this.createNewTaskDraft } timerOn={ this.state.timerOn }/>
         { timeContainer }
       </div>
     );
