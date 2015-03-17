@@ -9,7 +9,11 @@ module.exports = React.createClass({
       return (<TaskItem task={ task } key={ index }/>);
     });
 
-    var newTask = this.props.newTask ? <NewTaskItem task={ this.props.newTask } updateTask={ this.props.updateNewTask } createNewTask={ this.props.createNewTask }/> : <div className="create-new-task" onClick={ this.props.createNewTaskDraft }>Create New Task</div>;
+    var newTask;
+    if (this.props.newTask)
+      newTask = <NewTaskItem task={ this.props.newTask } updateTask={ this.props.updateNewTask } createNewTask={ this.props.createNewTask }/>;
+    else
+      newTask = <div className="create-new-task" onClick={ this.props.createNewTaskDraft }>Create New Task</div>;
 
     return (
       <div className="task-list">

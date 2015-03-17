@@ -11,7 +11,7 @@
     border-bottom: 1px solid $task-seperator-color;
     padding: 13px 10px 8px 10px;
 
-    &.current {
+    &:first-child {
       background-color: $task-item-color;
     }
   }

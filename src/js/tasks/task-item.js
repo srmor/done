@@ -7,12 +7,8 @@ module.exports = React.createClass({
   render: function () {
     var currentTask = this.props.task;
 
-    var classes = ['task-item'];
-    if (currentTask.current)
-      classes.push('current');
-
     return (
-      <div className={ classes.join(' ') }>
+      <div className="task-item">
         <TaskStartTime startTime={ currentTask.startTime }/>
         <Task title={ currentTask.title }/>
       </div>

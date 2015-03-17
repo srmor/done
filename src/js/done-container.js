@@ -66,6 +66,28 @@ var startTimeStringToTimeStamp = function (startTime) {
 };
 
 module.exports = React.createClass({
+  startTask: function () {
+    this.setState(function (previousState) {
+      var nextTask = previousState.tasks[0];
+
+      if (!nextTask.remainingTime)
+        nextTask.remainingTime = nextTask.remainingTime = previousState.taskTime;
+
+      return {current: nextTask};
+    });
+  },
+  pauseTask: function () {
+    this.setState({
+      current: null
+    });
+  },
+  updateCurrentTaskRemainingTime: function (newTime) {
+    this.setState(function (previousState) {
+      var newCurrent = previousState.current;
+      newCurrent.remainingTime = newTime;
+      return {current: newCurrent};
+    });
+  },
   updateNewTask: function (value) {
     this.setState(function(previousState) {
       var newTask = previousState.newTask;
@@ -155,7 +177,7 @@ module.exports = React.createClass({
     return (
       <div className="outer-container">
         <TaskList tasks={ this.state.tasks } newTask={ this.state.newTask } updateNewTask={ this.updateNewTask } createNewTask={ this.createNewTask } createNewTaskDraft={ this.createNewTaskDraft }/>
-        <TimeContainer currentTask={ this.state.current } totalTime={ this.state.taskTime }/>
+        <TimeContainer currentTask={ this.state.current } totalTime={ this.state.taskTime } start={ this.startTask } pause={ this.pauseTask } updateCurrentTaskRemainingTime={ this.updateCurrentTaskRemainingTime }/>
       </div>
     );
   }
